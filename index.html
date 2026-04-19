@@ -228,8 +228,8 @@
     /* ── Photos ── */
     #photos { background: var(--cream); }
     .photo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 1.5rem;
       max-width: 900px;
       margin: 0 auto;
@@ -246,11 +246,14 @@
       transform: translateY(-6px) rotate(0.8deg);
       box-shadow: 0 12px 40px rgba(181,84,90,.25);
     }
-    .photo-card.big { grid-row: span 2; }
+    .photo-row-small {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
     .photo-slot {
       width: 100%;
-      height: 100%;
-      min-height: 220px;
+      aspect-ratio: 1/1;
       object-fit: cover;
       display: block;
       background: linear-gradient(135deg, #fce8e8 0%, #f7d6d0 100%);
@@ -512,24 +515,24 @@
     <!-- Чтобы добавить фото: замени class="photo-slot placeholder" на <img> -->
     <!-- Пример с реальным фото: <img class="photo-slot" src="photos/photo1.jpg" alt="Подпись"> -->
 
-    <div class="photo-card big" onclick="openLightbox(this)">
+    <div class="photo-card" onclick="openLightbox(this)">
       <img class="photo-slot" src="photos/photo1.jpg" alt="Наше лучшее фото">
       <div class="photo-label">Наше лучшее фото</div>
     </div>
 
-    <div class="photo-card" onclick="openLightbox(this)">
-      <img class="photo-slot" src="photos/photo2.jpg" alt="Просто мы">
-      <div class="photo-label">Просто мы</div>
-    </div>
-
-    <div class="photo-card" onclick="openLightbox(this)">
-      <img class="photo-slot" src="photos/photo3.jpg" alt="Прогулки">
-      <div class="photo-label">Прогулки</div>
-    </div>
-
-    <div class="photo-card" onclick="openLightbox(this)">
-      <img class="photo-slot" src="photos/photo4.jpg" alt="Ещё момент">
-      <div class="photo-label">Ещё момент</div>
+    <div class="photo-row-small">
+      <div class="photo-card" onclick="openLightbox(this)">
+        <img class="photo-slot" src="photos/photo2.jpg" alt="Просто мы">
+        <div class="photo-label">Просто мы</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox(this)">
+        <img class="photo-slot" src="photos/photo3.jpg" alt="Прогулки">
+        <div class="photo-label">Прогулки</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox(this)">
+        <img class="photo-slot" src="photos/photo4.jpg" alt="Ещё момент">
+        <div class="photo-label">Ещё момент</div>
+      </div>
     </div>
 
   </div>
