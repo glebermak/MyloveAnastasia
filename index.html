@@ -229,9 +229,9 @@
     #photos { background: var(--cream); }
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
     }
     .photo-card {
@@ -246,15 +246,14 @@
       transform: translateY(-6px) rotate(0.8deg);
       box-shadow: 0 12px 40px rgba(181,84,90,.25);
     }
-    .photo-card.wide  { grid-column: span 2; }
-    .photo-card.tall  { grid-row:    span 2; }
+    .photo-card.big { grid-row: span 2; }
     .photo-slot {
       width: 100%;
-      aspect-ratio: 4/3;
+      height: 100%;
+      min-height: 220px;
       object-fit: cover;
       display: block;
       background: linear-gradient(135deg, #fce8e8 0%, #f7d6d0 100%);
-      position: relative;
     }
     .photo-slot.placeholder {
       display: flex;
@@ -513,12 +512,12 @@
     <!-- Чтобы добавить фото: замени class="photo-slot placeholder" на <img> -->
     <!-- Пример с реальным фото: <img class="photo-slot" src="photos/photo1.jpg" alt="Подпись"> -->
 
-    <div class="photo-card wide" onclick="openLightbox(this)">
+    <div class="photo-card big" onclick="openLightbox(this)">
       <img class="photo-slot" src="photos/photo1.jpg" alt="Наше лучшее фото">
       <div class="photo-label">Наше лучшее фото</div>
     </div>
 
-    <div class="photo-card tall" onclick="openLightbox(this)">
+    <div class="photo-card" onclick="openLightbox(this)">
       <img class="photo-slot" src="photos/photo2.jpg" alt="Просто мы">
       <div class="photo-label">Просто мы</div>
     </div>
