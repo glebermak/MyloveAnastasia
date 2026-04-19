@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Для Настеньки 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600&family=Lora:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blush:    #f7d6d0;
+      --rose:     #e8a0a0;
+      --deep:     #b5545a;
+      --cream:    #fff8f4;
+      --petal:    #fce8e8;
+      --sage:     #c8d8c0;
+      --gold:     #d4a853;
+      --text:     #4a2c2a;
+      --muted:    #9c6b68;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Lora', serif;
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🌸%3C/text%3E%3C/svg%3E") 12 12, auto;
+    }
+
+    /* ── Floating petals background ── */
+    .petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -60px;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0)   rotate(0deg); opacity: 0.7; }
+      80%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 2rem;
+      background: rgba(247, 214, 208, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 160, 160, 0.3);
+    }
+    nav a {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--deep);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color .25s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: radial-gradient(ellipse at 60% 40%, #fce8e8 0%, #fff4f0 50%, #fef0f8 100%);
+      z-index: 1;
+    }
+    .hero-badge {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      animation: fadeUp 1s ease both;
+    }
+    #hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--deep);
+      animation: fadeUp 1s .2s ease both;
+    }
+    #hero h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+    .hero-heart {
+      font-size: 3rem;
+      margin: 1.5rem 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1);   }
+      50%      { transform: scale(1.2); }
+    }
+    #hero p {
+      font-size: 1.15rem;
+      max-width: 500px;
+      color: var(--muted);
+      font-style: italic;
+      animation: fadeUp 1s .4s ease both;
+      line-height: 1.8;
+    }
+    .scroll-hint {
+      margin-top: 3rem;
+      font-family: 'Caveat', cursive;
+      color: var(--rose);
+      font-size: 1rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(8px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Section base ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--rose);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      color: var(--deep);
+      margin-bottom: 3rem;
+    }
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    /* ── Our Story ── */
+    #story { background: var(--petal); }
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--rose) 20%, var(--rose) 80%, transparent);
+      transform: translateX(-50%);
+    }
+    .tl-item {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: flex-start;
+    }
+    .tl-item:nth-child(odd)  { flex-direction: row-reverse; text-align: right; }
+    .tl-item:nth-child(even) { text-align: left; }
+    .tl-dot {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 0 0 6px var(--petal), 0 0 0 8px var(--rose);
+      z-index: 2;
+      position: relative;
+    }
+    .tl-content { flex: 1; }
+    .tl-date {
+      font-family: 'Caveat', cursive;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: .25rem;
+    }
+    .tl-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--deep);
+      margin-bottom: .4rem;
+    }
+    .tl-content p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── Photos ── */
+    #photos { background: var(--cream); }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .photo-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--blush);
+      box-shadow: 0 4px 20px rgba(181,84,90,.12);
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+    .photo-card:hover {
+      transform: translateY(-6px) rotate(0.8deg);
+      box-shadow: 0 12px 40px rgba(181,84,90,.25);
+    }
+    .photo-card.wide  { grid-column: span 2; }
+    .photo-card.tall  { grid-row:    span 2; }
+    .photo-slot {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #fce8e8 0%, #f7d6d0 100%);
+      position: relative;
+    }
+    .photo-slot.placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: var(--rose);
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      min-height: 200px;
+      border: 2px dashed var(--rose);
+      border-radius: 16px;
+      transition: background .2s;
+    }
+    .photo-slot.placeholder span { font-size: 2.5rem; }
+    .photo-label {
+      padding: .8rem 1rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      color: var(--deep);
+      text-align: center;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(74,44,42,.85);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-size: 2rem; color: #fff; cursor: pointer; line-height: 1;
+    }
+    .lightbox-caption {
+      color: #fff; font-family: 'Caveat', cursive; font-size: 1.3rem;
+    }
+
+    /* ── Reasons ── */
+    #reasons {
+      background: linear-gradient(160deg, #fce8e8 0%, #fff4f8 100%);
+    }
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .reason-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      border: 1px solid rgba(232,160,160,.25);
+      box-shadow: 0 2px 16px rgba(181,84,90,.07);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .reason-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(181,84,90,.18);
+    }
+    .reason-emoji { font-size: 2rem; margin-bottom: .8rem; }
+    .reason-card p {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--deep);
+      line-height: 1.5;
+    }
+
+    /* ── Love letter ── */
+    #letter {
+      background: var(--petal);
+      text-align: center;
+    }
+    .letter-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 8px 40px rgba(181,84,90,.12);
+      position: relative;
+    }
+    .letter-wrap::before {
+      content: '💌';
+      position: absolute;
+      top: -1.5rem; left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+    }
+    .letter-wrap h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--deep);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .letter-wrap p {
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .letter-sig {
+      margin-top: 2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      color: var(--deep);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--deep);
+      color: rgba(255,255,255,.8);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      position: relative; z-index: 1;
+    }
+    footer .heart { color: var(--blush); animation: pulse 1.5s infinite; display: inline-block; }
+
+    /* ── Upload helper ── */
+    .how-to-add {
+      max-width: 700px; margin: 3rem auto 0;
+      background: rgba(255,255,255,.7);
+      border: 1px dashed var(--rose);
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+    }
+    .how-to-add summary {
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      color: var(--deep);
+    }
+    .how-to-add ol {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 2;
+    }
+    code {
+      background: var(--petal);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: .9em;
+      color: var(--deep);
+    }
+
+    @media (max-width: 600px) {
+      .timeline::before { left: 22px; }
+      .tl-item, .tl-item:nth-child(odd) {
+        flex-direction: row; text-align: left;
+      }
+      .photo-card.wide { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petals" id="petals"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lb-img" src="" alt=""/>
+  <div class="lightbox-caption" id="lb-cap"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero">🏠 Главная</a>
+  <a href="#story">📖 Наша история</a>
+  <a href="#photos">📸 Фото</a>
+  <a href="#reasons">💕 Причины</a>
+  <a href="#letter">💌 Письмо</a>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-badge">✦ наше маленькое место ✦</div>
+  <h1>Для <em>Настеньки</em></h1>
+  <div class="hero-heart">🌸</div>
+  <p>Здесь живут наши воспоминания, наш смех и всё то, что делает нас — нами.</p>
+  <div class="scroll-hint">↓ листай вниз ↓</div>
+</section>
+
+<!-- Our Story -->
+<section id="story">
+  <div class="section-label">✦ наша история</div>
+  <h2 class="section-title">Как всё началось</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot">🌟</div>
+      <div class="tl-content">
+        <div class="tl-date">Дата 1 — измени меня</div>
+        <h3>Первая встреча</h3>
+        <p>Опиши здесь вашу первую встречу — где это было, что ты почувствовал, что она сказала…</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">🌹</div>
+      <div class="tl-content">
+        <div class="tl-date">Дата 2 — измени меня</div>
+        <h3>Первое свидание</h3>
+        <p>Расскажи о вашем первом свидании — куда ходили, что ели, как было классно вместе.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">💑</div>
+      <div class="tl-content">
+        <div class="tl-date">Дата 3 — измени меня</div>
+        <h3>Стали парой</h3>
+        <p>Как это произошло? Этот день стоит описать с улыбкой — ведь он изменил всё.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">🎉</div>
+      <div class="tl-content">
+        <div class="tl-date">Дата 4 — измени меня</div>
+        <h3>Любимый момент</h3>
+        <p>Добавь столько событий, сколько хочешь — каждое наше воспоминание заслуживает места здесь.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Photos -->
+<section id="photos">
+  <div class="section-label">✦ наши моменты</div>
+  <h2 class="section-title">Фотоальбом</h2>
+  <div class="divider"></div>
+
+  <div class="photo-grid">
+
+    <!-- Чтобы добавить фото: замени class="photo-slot placeholder" на <img> -->
+    <!-- Пример с реальным фото: <img class="photo-slot" src="photos/photo1.jpg" alt="Подпись"> -->
+
+    <div class="photo-card wide" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Наше лучшее фото">
+        <span>📷</span>сюда главное фото
+      </div>
+      <div class="photo-label">Наше лучшее фото</div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Первое свидание">
+        <span>🌹</span>первое свидание
+      </div>
+      <div class="photo-label">Первое свидание</div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Наш любимый город">
+        <span>🌆</span>наш любимый город
+      </div>
+      <div class="photo-label">Наш любимый город</div>
+    </div>
+
+    <div class="photo-card tall" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Просто мы">
+        <span>💕</span>просто мы
+      </div>
+      <div class="photo-label">Просто мы</div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Любимое кафе">
+        <span>☕</span>любимое кафе
+      </div>
+      <div class="photo-label">Любимое кафе</div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Прогулки">
+        <span>🌸</span>прогулки
+      </div>
+      <div class="photo-label">Прогулки</div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox(this)">
+      <div class="photo-slot placeholder" data-label="Добавь ещё">
+        <span>✨</span>добавь ещё фото
+      </div>
+      <div class="photo-label">Добавь ещё</div>
+    </div>
+
+  </div>
+
+  <!-- Инструкция как добавить фото -->
+  <details class="how-to-add">
+    <summary>📌 Как добавить настоящие фотографии?</summary>
+    <ol>
+      <li>Создай папку <code>photos/</code> рядом с файлом <code>index.html</code></li>
+      <li>Закинь туда свои фотографии (например, <code>photo1.jpg</code>)</li>
+      <li>Найди нужную карточку и замени блок <code>&lt;div class="photo-slot placeholder"&gt;</code> на:<br>
+        <code>&lt;img class="photo-slot" src="photos/photo1.jpg" alt="Подпись"&gt;</code>
+      </li>
+      <li>Сохрани файл и залей всё на GitHub — фото подхватятся сами 🌸</li>
+    </ol>
+  </details>
+</section>
+
+<!-- Reasons -->
+<section id="reasons">
+  <div class="section-label">✦ за что я люблю тебя</div>
+  <h2 class="section-title">Причины ❤️</h2>
+  <div class="divider"></div>
+  <div class="reasons-grid">
+    <div class="reason-card"><div class="reason-emoji">😊</div><p>За твою улыбку, которая освещает всё вокруг</p></div>
+    <div class="reason-card"><div class="reason-emoji">🤗</div><p>За объятия, в которых хочется оставаться вечно</p></div>
+    <div class="reason-card"><div class="reason-emoji">🌙</div><p>За наши долгие разговоры до самого утра</p></div>
+    <div class="reason-card"><div class="reason-emoji">☕</div><p>За то, как ты смеёшься над моими глупыми шутками</p></div>
+    <div class="reason-card"><div class="reason-emoji">🌟</div><p>За то, что делаешь меня лучше каждый день</p></div>
+    <div class="reason-card"><div class="reason-emoji">🎵</div><p>За нашу любимую музыку и танцы на кухне</p></div>
+    <div class="reason-card"><div class="reason-emoji">🐾</div><p>Добавь свою причину — ты знаешь их лучше всех!</p></div>
+    <div class="reason-card"><div class="reason-emoji">💫</div><p>Просто за то, что ты — это ты, Настенька</p></div>
+  </div>
+</section>
+
+<!-- Letter -->
+<section id="letter">
+  <div class="section-label">✦ для тебя</div>
+  <h2 class="section-title">Письмо</h2>
+  <div class="divider"></div>
+  <div class="letter-wrap">
+    <h2>Дорогая Настенька,</h2>
+    <p>
+      Здесь должны быть твои слова — те самые, которые ты хочешь, чтобы она читала снова и снова. 
+      Напиши всё, что чувствуешь: это место только для вас двоих.
+    </p>
+    <p>
+      Расскажи ей, как она изменила твою жизнь. Или просто о том, как здорово, что она есть. 
+      Сделай это настоящим — ведь она это заслуживает.
+    </p>
+    <p>
+      Ты можешь писать длинно или коротко, серьёзно или смешно — главное, от сердца. 
+      Это твоё послание, которое останется здесь навсегда 🌸
+    </p>
+    <div class="letter-sig">С любовью, [твоё имя] ♡</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  Сделано с <span class="heart">♡</span> специально для Настеньки &nbsp;·&nbsp; 2025
+</footer>
+
+<script>
+  /* ── Floating petals ── */
+  const emojis = ['🌸','🌷','🍀','🌺','💮','🌼','✨','💕'];
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'petal';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (8 + Math.random() * 12) + 's';
+    el.style.animationDelay   = (Math.random() * 14) + 's';
+    el.style.fontSize = (.8 + Math.random() * 1.4) + 'rem';
+    container.appendChild(el);
+  }
+
+  /* ── Lightbox ── */
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    const cap = card.querySelector('.photo-label').textContent;
+    const lb  = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-cap');
+
+    if (img) {
+      lbImg.src = img.src;
+      lbImg.style.display = 'block';
+    } else {
+      lbImg.style.display = 'none';
+    }
+    lbCap.textContent = cap;
+    lb.classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+  /* ── Scroll fade-in ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.tl-item, .reason-card, .photo-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
